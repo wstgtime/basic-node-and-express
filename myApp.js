@@ -11,6 +11,10 @@ app.get("/", function(req, res) {
     res.sendFile(pathToIndex);
 });
 
+app.get("/json", function(req, res) {
+    res.json({"message": "Hello json"});
+});
+
 
 
 
