@@ -5,6 +5,11 @@ let app = express();
 
 // console.log("Hello World");
 
+app.use("/", function(req, res, next) {
+    console.log(`${req.method} ${req.path} - ${req.ip}`);
+    next();
+});
+
 const pathToAssets = __dirname + "/public";
 app.use("/public", express.static(pathToAssets));
 
@@ -19,36 +24,4 @@ app.get("/json", function(req, res) {
     res.json(messageJson);
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- module.exports = app;
+module.exports = app;
