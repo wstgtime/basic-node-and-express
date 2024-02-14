@@ -10,6 +10,16 @@ app.use("/", function(req, res, next) {
     next();
 });
 
+app.get("/now", 
+    function(req, res, next) {
+        req.time = new Date().toString();
+        next();
+    },
+    function(req, res) {
+        res.send({ time: req.time });
+    }
+);
+
 const pathToAssets = __dirname + "/public";
 app.use("/public", express.static(pathToAssets));
 
@@ -23,5 +33,6 @@ app.get("/json", function(req, res) {
     const messageJson = isUppercase ? {"message": "HELLO JSON"} : {"message": "Hello json"};
     res.json(messageJson);
 });
+
 
 module.exports = app;
