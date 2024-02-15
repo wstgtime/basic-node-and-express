@@ -1,4 +1,5 @@
 require('dotenv').config()
+const bodyParser = require('body-parser');
 
 let express = require('express');
 let app = express();
@@ -23,6 +24,8 @@ app.get("/now",
 const pathToAssets = __dirname + "/public";
 app.use("/public", express.static(pathToAssets));
 
+app.use("/", bodyParser.urlencoded({ extended: false }));
+
 app.get("/", function(req, res) {
     const pathToIndex = __dirname + '/views/index.html';
     res.sendFile(pathToIndex);
@@ -41,5 +44,7 @@ app.get("/:word/echo", function(req, res) {
 app.get("/name", function(req, res) {
     res.json({ name: `${req.query.first} ${req.query.last}`});
 });
+
+
 
 module.exports = app;
